@@ -13,20 +13,20 @@ namespace ComponentGameTest
 {
     class GameObject
     {
-        public float xPosition;
-        public float yPosition;
-        public float xVelocity;
-        public float yVelocity;
+        public float xPosition = 0;
+        public float yPosition = 0;
+        public float xVelocity = 0;
+        public float yVelocity = 0;
 
-        public Texture2D texture;
-        public Vector2 position;
-        public Rectangle sourceRectangle;
-        public Color color;
-        public float rotation;
-        public Vector2 origin;
-        public float scale;
-        public SpriteEffects effects;
-        public float layerDepth;
+        public Texture2D texture = null;
+        public Vector2 position = Vector2.Zero;
+        public Rectangle sourceRectangle = new Rectangle(0,0,0,0);
+        public Color color = Color.White;
+        public float rotation = 0;
+        public Vector2 origin = Vector2.Zero;
+        public float scale = 1; 
+        public SpriteEffects effects = SpriteEffects.None;
+        public float layerDepth = 1;
 
         List<UpdateComponent> updateComponents = new List<UpdateComponent>();
         List<GraphicsComponent> drawComponents = new List<GraphicsComponent>();
@@ -64,6 +64,8 @@ namespace ComponentGameTest
 
         public void Update(GameTime gameTime)
         {
+            position = new Vector2(xPosition, yPosition);
+
             foreach (UpdateComponent updateComp in updateComponents)
                 updateComp.Update(this, gameTime);
         }

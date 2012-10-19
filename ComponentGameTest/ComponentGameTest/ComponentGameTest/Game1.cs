@@ -19,9 +19,13 @@ namespace ComponentGameTest
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        List<GameObject> gameObjects = new List<GameObject>();
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferHeight = GameConstants.ScreenHeight;
+            graphics.PreferredBackBufferWidth = GameConstants.ScreenWidth;
             Content.RootDirectory = "Content";
         }
 
@@ -47,6 +51,19 @@ namespace ComponentGameTest
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
+
+
+            // ---------------------------------
+            // Example object with components
+            List<UpdateComponent> updateC = new List<UpdateComponent>();
+            updateC.Add(new PhysicsComponent());
+            List<GraphicsComponent> graphicsC = new List<GraphicsComponent>();
+            graphicsC.Add(new Graphics2DImageComponent());
+            GameObject p1 = new GameObject(updateC, graphicsC);
+            p1.texture = Content.Load<Texture2D>("Slime_Medium");
+            gameObjects.Add(p1);
+            // ---------------------------------
+
         }
 
         /// <summary>
@@ -70,7 +87,10 @@ namespace ComponentGameTest
                 this.Exit();
 
             // TODO: Add your update logic here
-
+            for (int i = 0; i < gameObjects.Count; i++)
+            {
+                gameObjects[i].Update(gameTime);
+            }
 
             base.Update(gameTime);
         }
@@ -84,6 +104,12 @@ namespace ComponentGameTest
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            for (int i = 0; i < gameObjects.Count; i++)
+            {
+                gameObjects[i].Draw(spriteBatch);
+            }
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
