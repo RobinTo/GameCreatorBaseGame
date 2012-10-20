@@ -17,10 +17,6 @@ namespace ComponentGameTest
 
         public float xPosition = 0;
         public float yPosition = 0;
-        public float xVelocity = 0;
-        public float yVelocity = 0;
-        public float maxXVelocity = 5;
-        public float maxYVelocity = 5;
 
         public Texture2D texture = null;
         public Vector2 position = Vector2.Zero;

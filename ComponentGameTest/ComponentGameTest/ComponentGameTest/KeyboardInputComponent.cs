@@ -11,6 +11,7 @@
 // We need to change this to support multiplayer.
 
 using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -21,44 +22,40 @@ namespace ComponentGameTest
         KeyboardState oldK = new KeyboardState();
         KeyboardState newK = new KeyboardState();
 
+        public KeyboardInputComponent(EventHandler eventHandler)
+            : base(eventHandler)
+        {
+        }
+
         public override void Update(GameObject gameObject, GameTime gameTime)
         {
             newK = Keyboard.GetState();
-
+           
             if (IsKeyDown(Keys.D))
             {
-                if (gameObject.xVelocity < 0)
-                    gameObject.xVelocity = 0;
-                gameObject.xVelocity += 10.0f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                eventHandler.QueueEvent(new GameEvent(0));
             }
             else if (IsKeyDown(Keys.A))
             {
-                if (gameObject.xVelocity > 0)
-                    gameObject.xVelocity = 0;
-                gameObject.xVelocity -= 10.0f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                eventHandler.QueueEvent(new GameEvent(1));
             }
             else
             {
-                gameObject.xVelocity = 0;
+                eventHandler.QueueEvent(new GameEvent(2));
             }
 
             if (IsKeyDown(Keys.S))
             {
-                if (gameObject.yVelocity < 0)
-                    gameObject.yVelocity = 0;
-                gameObject.yVelocity += 10.0f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                eventHandler.QueueEvent(new GameEvent(3));
             }
             else if (IsKeyDown(Keys.W))
             {
-                if (gameObject.yVelocity > 0)
-                    gameObject.yVelocity = 0;
-                gameObject.yVelocity -= 10.0f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                eventHandler.QueueEvent(new GameEvent(4));
             }
             else
             {
-                gameObject.yVelocity = 0;
+                eventHandler.QueueEvent(new GameEvent(5));
             }
-
 
             oldK = newK;
         }

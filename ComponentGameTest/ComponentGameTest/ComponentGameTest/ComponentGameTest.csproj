@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollisionComponent.cs" />
+    <Compile Include="EventHandler.cs" />
     <Compile Include="GameConstants.cs" />
     <Compile Include="GameEvent.cs" />
     <Compile Include="GameObject.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="UpdateComponent.cs" />
+    <Compile Include="VariableManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

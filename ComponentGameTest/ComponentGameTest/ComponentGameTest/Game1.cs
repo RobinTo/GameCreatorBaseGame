@@ -22,6 +22,7 @@ namespace ComponentGameTest
 
         int IDCounter = 0;
         List<GameObject> gameObjects = new List<GameObject>();
+        EventHandler eventHandler = new EventHandler();
 
         public Game1()
         {
@@ -59,8 +60,8 @@ namespace ComponentGameTest
             // Example object with components
             GameObject p1 = new GameObject();
             p1.AddDrawComponent(new Graphics2DImageComponent());
-            p1.AddUpdateComponent(new PhysicsComponent());
-            p1.AddUpdateComponent(new KeyboardInputComponent());
+            p1.AddUpdateComponent(new PhysicsComponent(eventHandler));
+            p1.AddUpdateComponent(new KeyboardInputComponent(eventHandler));
             // Set texture
             p1.texture = Content.Load<Texture2D>("Slime_Medium");
             // Set ID
@@ -73,8 +74,8 @@ namespace ComponentGameTest
             // Example object with components
             GameObject p2 = new GameObject();
             p2.AddDrawComponent(new Graphics2DImageComponent());
-            p2.AddUpdateComponent(new PhysicsComponent());
-            p2.AddUpdateComponent(new CollisionComponent(gameObjects));
+            p2.AddUpdateComponent(new PhysicsComponent(eventHandler));
+            p2.AddUpdateComponent(new CollisionComponent(gameObjects, eventHandler));
             // Set texture
             p2.texture = Content.Load<Texture2D>("Slime_Medium");
             // Set ID
@@ -106,6 +107,9 @@ namespace ComponentGameTest
                 this.Exit();
 
             // TODO: Add your update logic here
+            // Clears all old events, and puts all queued events into new event list.
+            eventHandler.NewRound();
+            // Updates all objects.
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 gameObjects[i].Update(gameTime);

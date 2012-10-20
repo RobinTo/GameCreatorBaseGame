@@ -17,7 +17,9 @@ namespace ComponentGameTest
     class CollisionComponent : UpdateComponent
     {
         List<GameObject> gameObjects;
-        public CollisionComponent(List<GameObject> gameObjects)
+
+        public CollisionComponent(List<GameObject> gameObjects, EventHandler eventHandler)
+            : base(eventHandler)
         {
             this.gameObjects = gameObjects;
         }
