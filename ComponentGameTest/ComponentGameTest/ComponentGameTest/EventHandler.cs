@@ -22,7 +22,8 @@ namespace ComponentGameTest
         public void NewRound()
         {
             events.Clear();
-            events = queuedEvents;
+            for (int i = 0; i < queuedEvents.Count; i++ )
+                events.Add(queuedEvents[i]);
             queuedEvents.Clear();
         }
 

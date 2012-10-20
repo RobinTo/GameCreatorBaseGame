@@ -75,7 +75,6 @@ namespace ComponentGameTest
             GameObject p2 = new GameObject();
             p2.AddDrawComponent(new Graphics2DImageComponent());
             p2.AddUpdateComponent(new PhysicsComponent(eventHandler));
-            p2.AddUpdateComponent(new CollisionComponent(gameObjects, eventHandler));
             // Set texture
             p2.texture = Content.Load<Texture2D>("Slime_Medium");
             // Set ID
@@ -109,6 +108,7 @@ namespace ComponentGameTest
             // TODO: Add your update logic here
             // Clears all old events, and puts all queued events into new event list.
             eventHandler.NewRound();
+
             // Updates all objects.
             for (int i = 0; i < gameObjects.Count; i++)
             {
