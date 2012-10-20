@@ -30,7 +30,8 @@ namespace ComponentGameTest
                 if(new Rectangle((int)gameObject.xPosition, (int)gameObject.yPosition, gameObject.texture.Width, gameObject.texture.Height).Intersects
                     (new Rectangle((int)gameObjects[i].xPosition, (int)gameObjects[i].yPosition, gameObjects[i].texture.Width, gameObjects[i].texture.Height)))
                 {
-                    gameObject.xPosition += 5.0f;
+                    // Collision.
+                    //gameObject.xPosition += 5.0f;
                 }   
             }
         }

@@ -60,6 +60,7 @@ namespace ComponentGameTest
             GameObject p1 = new GameObject();
             p1.AddDrawComponent(new Graphics2DImageComponent());
             p1.AddUpdateComponent(new PhysicsComponent());
+            p1.AddUpdateComponent(new KeyboardInputComponent());
             // Set texture
             p1.texture = Content.Load<Texture2D>("Slime_Medium");
             // Set ID
