@@ -24,6 +24,7 @@ namespace ComponentGameTest
             if (gameObject.yPosition + gameObject.texture.Height > GameConstants.ScreenHeight)
             {
                 gameObject.yPosition = GameConstants.ScreenHeight - gameObject.texture.Height;
+                gameObject.yVelocity = -gameObject.yVelocity * 0.5f;
             }
         }
     }

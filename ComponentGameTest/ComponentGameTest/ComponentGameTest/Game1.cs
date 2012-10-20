@@ -19,6 +19,8 @@ namespace ComponentGameTest
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+
+        int IDCounter = 0;
         List<GameObject> gameObjects = new List<GameObject>();
 
         public Game1()
@@ -55,15 +57,31 @@ namespace ComponentGameTest
 
             // ---------------------------------
             // Example object with components
-            List<UpdateComponent> updateC = new List<UpdateComponent>();
-            updateC.Add(new PhysicsComponent());
-            List<GraphicsComponent> graphicsC = new List<GraphicsComponent>();
-            graphicsC.Add(new Graphics2DImageComponent());
-            GameObject p1 = new GameObject(updateC, graphicsC);
+            GameObject p1 = new GameObject();
+            p1.AddDrawComponent(new Graphics2DImageComponent());
+            p1.AddUpdateComponent(new PhysicsComponent());
+            // Set texture
             p1.texture = Content.Load<Texture2D>("Slime_Medium");
+            // Set ID
+            p1.ID = IDCounter;
+            IDCounter++;
+            // Add to game objects, to run in loops.
             gameObjects.Add(p1);
             // ---------------------------------
-
+            // ---------------------------------
+            // Example object with components
+            GameObject p2 = new GameObject();
+            p2.AddDrawComponent(new Graphics2DImageComponent());
+            p2.AddUpdateComponent(new PhysicsComponent());
+            p2.AddUpdateComponent(new CollisionComponent(gameObjects));
+            // Set texture
+            p2.texture = Content.Load<Texture2D>("Slime_Medium");
+            // Set ID
+            p2.ID = IDCounter;
+            IDCounter++;
+            // Add to game objects, to run in loops.
+            gameObjects.Add(p2);
+            // ---------------------------------
         }
 
         /// <summary>

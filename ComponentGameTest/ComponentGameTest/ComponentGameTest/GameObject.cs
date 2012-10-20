@@ -13,6 +13,8 @@ namespace ComponentGameTest
 {
     class GameObject
     {
+        public int ID;
+
         public float xPosition = 0;
         public float yPosition = 0;
         public float xVelocity = 0;

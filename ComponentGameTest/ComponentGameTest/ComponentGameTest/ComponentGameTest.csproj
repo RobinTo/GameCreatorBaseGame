@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollisionComponent.cs" />
     <Compile Include="GameConstants.cs" />
     <Compile Include="GameEvent.cs" />
     <Compile Include="GameObject.cs" />
