@@ -61,7 +61,10 @@ namespace ComponentGameTest
             GameObject p1 = new GameObject();
             p1.AddDrawComponent(new Graphics2DImageComponent());
             p1.AddUpdateComponent(new PhysicsComponent(eventHandler));
+            p1.AddUpdateComponent(new CollisionComponent(gameObjects, eventHandler));
             p1.AddUpdateComponent(new KeyboardInputComponent(eventHandler));
+            // Setting xPosition manually for demonstration purposes.
+            p1.xPosition = 250;
             // Set texture
             p1.texture = Content.Load<Texture2D>("Slime_Medium");
             // Set ID

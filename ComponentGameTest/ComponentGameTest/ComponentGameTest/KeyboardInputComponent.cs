@@ -33,28 +33,28 @@ namespace ComponentGameTest
            
             if (IsKeyDown(Keys.D))
             {
-                eventHandler.QueueEvent(new GameEvent(0));
+                eventHandler.QueueEvent(new GameEvent(0, gameObject.ID));
             }
             else if (IsKeyDown(Keys.A))
             {
-                eventHandler.QueueEvent(new GameEvent(1));
+                eventHandler.QueueEvent(new GameEvent(1, gameObject.ID));
             }
             else
             {
-                eventHandler.QueueEvent(new GameEvent(2));
+                eventHandler.QueueEvent(new GameEvent(2, gameObject.ID));
             }
 
             if (IsKeyDown(Keys.S))
             {
-                eventHandler.QueueEvent(new GameEvent(3));
+                eventHandler.QueueEvent(new GameEvent(3, gameObject.ID));
             }
             else if (IsKeyDown(Keys.W))
             {
-                eventHandler.QueueEvent(new GameEvent(4));
+                eventHandler.QueueEvent(new GameEvent(4, gameObject.ID));
             }
             else
             {
-                eventHandler.QueueEvent(new GameEvent(5));
+                eventHandler.QueueEvent(new GameEvent(5, gameObject.ID));
             }
 
             oldK = newK;
