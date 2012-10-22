@@ -29,8 +29,8 @@ namespace ComponentGameTest
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 if(gameObjects[i] != gameObject)
-                if(new Rectangle((int)gameObject.xPosition, (int)gameObject.yPosition, gameObject.texture.Width, gameObject.texture.Height).Intersects
-                    (new Rectangle((int)gameObjects[i].xPosition, (int)gameObjects[i].yPosition, gameObjects[i].texture.Width, gameObjects[i].texture.Height)))
+                if(new Rectangle((int)gameObject.xPosition, (int)gameObject.yPosition, gameObject.width, gameObject.height).Intersects
+                    (new Rectangle((int)gameObjects[i].xPosition, (int)gameObjects[i].yPosition, gameObjects[i].width, gameObjects[i].height)))
                 {
                     // Collision.
                     eventHandler.QueueEvent(new GameEvent(10, gameObject.ID));

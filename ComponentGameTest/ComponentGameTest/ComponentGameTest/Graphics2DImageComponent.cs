@@ -12,9 +12,23 @@ namespace ComponentGameTest
 {
     class Graphics2DImageComponent : GraphicsComponent
     {
+        Texture2D texture = null;
+        Color color = Color.White;
+
+        public Graphics2DImageComponent(Texture2D texture)
+        {
+            this.texture = texture;
+        }
+
+        public override void Update(GameObject gameObject, GameTime gameTime)
+        {
+            gameObject.height = texture.Height;
+            gameObject.width = texture.Width;
+        }
+
         public override void Draw(GameObject gameObject, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(gameObject.texture, gameObject.position, gameObject.color);
+            spriteBatch.Draw(texture, new Vector2(gameObject.xPosition, gameObject.yPosition), color);
         }
     }
 }

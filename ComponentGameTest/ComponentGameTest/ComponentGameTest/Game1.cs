@@ -59,14 +59,12 @@ namespace ComponentGameTest
             // ---------------------------------
             // Example object with components
             GameObject p1 = new GameObject();
-            p1.AddDrawComponent(new Graphics2DImageComponent());
+            p1.AddDrawComponent(new Graphics2DImageComponent(Content.Load<Texture2D>("Slime_Medium")));
             p1.AddUpdateComponent(new PhysicsComponent(eventHandler));
             p1.AddUpdateComponent(new CollisionComponent(gameObjects, eventHandler));
             p1.AddUpdateComponent(new KeyboardInputComponent(eventHandler));
             // Setting xPosition manually for demonstration purposes.
             p1.xPosition = 250;
-            // Set texture
-            p1.texture = Content.Load<Texture2D>("Slime_Medium");
             // Set ID
             p1.ID = IDCounter;
             IDCounter++;
@@ -76,10 +74,8 @@ namespace ComponentGameTest
             // ---------------------------------
             // Example object with components
             GameObject p2 = new GameObject();
-            p2.AddDrawComponent(new Graphics2DImageComponent());
+            p2.AddDrawComponent(new Graphics2DImageComponent(Content.Load<Texture2D>("Slime_Medium")));
             p2.AddUpdateComponent(new PhysicsComponent(eventHandler));
-            // Set texture
-            p2.texture = Content.Load<Texture2D>("Slime_Medium");
             // Set ID
             p2.ID = IDCounter;
             IDCounter++;

@@ -27,6 +27,7 @@ namespace ComponentGameTest
 
         public override void Update(GameObject gameObject, GameTime gameTime)
         {
+            // Event handling
             List<GameEvent> events = eventHandler.Events;
             for (int i = 0; i < events.Count; i++)
             {
@@ -53,12 +54,14 @@ namespace ComponentGameTest
                     }
                 }
             }
+            // -----------------------
+            
 
             xVelocity = MathHelper.Clamp(xVelocity, -maxXVelocity, maxXVelocity);
             yVelocity = MathHelper.Clamp(yVelocity, -maxYVelocity, maxYVelocity);
             // Move position by velocity and limit to on-screen.
-            gameObject.yPosition = MathHelper.Clamp(gameObject.yPosition + yVelocity, 0, GameConstants.ScreenHeight - gameObject.texture.Height);
-            gameObject.xPosition = MathHelper.Clamp(gameObject.xPosition + xVelocity, 0, GameConstants.ScreenWidth - gameObject.texture.Width);
+            gameObject.yPosition = MathHelper.Clamp(gameObject.yPosition + yVelocity, 0, GameConstants.ScreenHeight - gameObject.height);
+            gameObject.xPosition = MathHelper.Clamp(gameObject.xPosition + xVelocity, 0, GameConstants.ScreenWidth - gameObject.width);
             // Really is no gravity.
         }
     }

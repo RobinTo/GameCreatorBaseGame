@@ -13,20 +13,12 @@ namespace ComponentGameTest
 {
     class GameObject
     {
-        public int ID;
+        public int ID;              // Unique ID
 
-        public float xPosition = 0;
-        public float yPosition = 0;
-
-        public Texture2D texture = null;
-        public Vector2 position = Vector2.Zero;
-        public Rectangle sourceRectangle = new Rectangle(0,0,0,0);
-        public Color color = Color.White;
-        public float rotation = 0;
-        public Vector2 origin = Vector2.Zero;
-        public float scale = 1; 
-        public SpriteEffects effects = SpriteEffects.None;
-        public float layerDepth = 1;
+        public float xPosition = 0; // For position
+        public float yPosition = 0; // For position
+        public int height = 0;      // For collision
+        public int width = 0;       // For collision
 
         List<UpdateComponent> updateComponents = new List<UpdateComponent>();
         List<GraphicsComponent> drawComponents = new List<GraphicsComponent>();
@@ -64,10 +56,11 @@ namespace ComponentGameTest
 
         public void Update(GameTime gameTime)
         {
-            position = new Vector2(xPosition, yPosition);
-
             foreach (UpdateComponent updateComp in updateComponents)
                 updateComp.Update(this, gameTime);
+
+            foreach (GraphicsComponent drawComp in drawComponents)
+                drawComp.Update(this, gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
