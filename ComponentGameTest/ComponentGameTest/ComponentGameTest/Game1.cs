@@ -23,6 +23,7 @@ namespace ComponentGameTest
         int IDCounter = 0;
         List<GameObject> gameObjects = new List<GameObject>();
         EventHandler eventHandler = new EventHandler();
+        Map_2DTile map;
 
         public Game1()
         {
@@ -55,16 +56,17 @@ namespace ComponentGameTest
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
 
-
+            // Map
+            map = new Map_2DTile();
+            map.Load(Content, "./Content/Map1.txt");
             // ---------------------------------
             // Example object with components
             GameObject p1 = new GameObject();
             p1.AddDrawComponent(new Graphics2DImageComponent(Content.Load<Texture2D>("Slime_Medium")));
-            p1.AddUpdateComponent(new PhysicsComponent(eventHandler));
-            p1.AddUpdateComponent(new CollisionComponent(gameObjects, eventHandler));
+            p1.AddUpdateComponent(new SnapToTileMovementComponent(eventHandler, map));
             p1.AddUpdateComponent(new KeyboardInputComponent(eventHandler));
             // Setting xPosition manually for demonstration purposes.
-            p1.xPosition = 250;
+            p1.xPosition = 32;
             // Set ID
             p1.ID = IDCounter;
             IDCounter++;
@@ -127,6 +129,8 @@ namespace ComponentGameTest
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
+            map.Draw(spriteBatch);
+
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 gameObjects[i].Draw(spriteBatch);

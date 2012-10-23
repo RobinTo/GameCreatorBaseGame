@@ -52,6 +52,10 @@ namespace ComponentGameTest
             {
                 eventHandler.QueueEvent(new GameEvent(4, gameObject.ID));
             }
+            else
+            {
+                eventHandler.QueueEvent(new GameEvent(5, gameObject.ID));
+            }
 
             oldK = newK;
         }
