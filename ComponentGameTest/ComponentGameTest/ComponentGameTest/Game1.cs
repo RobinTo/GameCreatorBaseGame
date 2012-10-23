@@ -66,7 +66,7 @@ namespace ComponentGameTest
             p1.AddUpdateComponent(new SnapToTileMovementComponent(eventHandler, map));
             p1.AddUpdateComponent(new KeyboardInputComponent(eventHandler));
             // Setting xPosition manually for demonstration purposes.
-            p1.xPosition = 32;
+            p1.xPosition = 64;
             // Set ID
             p1.ID = IDCounter;
             IDCounter++;

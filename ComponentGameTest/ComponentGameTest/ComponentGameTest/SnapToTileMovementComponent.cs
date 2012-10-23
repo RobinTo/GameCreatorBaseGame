@@ -13,10 +13,22 @@ using Microsoft.Xna.Framework;
 
 namespace ComponentGameTest
 {
+    enum Moves
+    {
+        Left = 0,
+        Right = 1,
+        Up = 2,
+        Down = 3,
+        None
+    }
+
     class SnapToTileMovementComponent : UpdateComponent
     {
         const float moveTime = 0.25f;
-        float moveTimer = moveTime;
+        float moveTimer = 0;
+        int targetPosX = GameConstants.TileWidth;
+        int targetPosY = GameConstants.TileHeight;
+        Moves moveDirection;
         Map_2DTile m;
 
         public SnapToTileMovementComponent(EventHandler eventHandler, Map_2DTile m)
@@ -41,45 +53,94 @@ namespace ComponentGameTest
         {
             moveTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             // Event handling
-            List<GameEvent> events = eventHandler.Events;
-            for (int i = 0; i < events.Count; i++)
+            if (moveTimer <= 0)
             {
-                if (events[i].ActOnID == gameObject.ID)
+                gameObject.xPosition = targetPosX;
+                gameObject.yPosition = targetPosY;
+                List<GameEvent> events = eventHandler.Events;
+                for (int i = 0; i < events.Count; i++)
                 {
-                    int positionX = (int)Math.Round(gameObject.xPosition / GameConstants.TileWidth, 0);
-                    int positionY = (int)Math.Round(gameObject.yPosition / GameConstants.TileHeight, 0);
-                    if (events[i].ID == 0)
+                    if (events[i].ActOnID == gameObject.ID)
                     {
-                        if (CanMoveToTile(positionX + 1, positionY) && moveTimer <= 0)
+                        int positionX = (int)Math.Round(gameObject.xPosition / GameConstants.TileWidth, 0);
+                        int positionY = (int)Math.Round(gameObject.yPosition / GameConstants.TileHeight, 0);
+                        if (events[i].ID == 0)
                         {
-                            gameObject.xPosition += GameConstants.TileWidth;
-                            moveTimer = moveTime;
+                            if (CanMoveToTile(positionX + 1, positionY))
+                            {
+                                moveDirection = Moves.Right;
+                                targetPosX += GameConstants.TileWidth;
+                                moveTimer = moveTime;
+                            }
+                        }
+                        else if (events[i].ID == 1)
+                        {
+                            if (CanMoveToTile(positionX - 1, positionY))
+                            {
+                                moveDirection = Moves.Left;
+                                targetPosX -= GameConstants.TileWidth;
+                                moveTimer = moveTime;
+                            }
+                        }
+                        else if (events[i].ID == 3)
+                        {
+                            if (CanMoveToTile(positionX, positionY + 1))
+                            {
+                                moveDirection = Moves.Down;
+                                targetPosY += GameConstants.TileHeight;
+                                moveTimer = moveTime;
+                            }
+                        }
+                        else if (events[i].ID == 4)
+                        {
+                            if (CanMoveToTile(positionX, positionY - 1))
+                            {
+                                moveDirection = Moves.Up;
+                                targetPosY -= GameConstants.TileHeight;
+                                moveTimer = moveTime;
+                            }
                         }
                     }
-                    else if (events[i].ID == 1)
-                    {
-                        if (CanMoveToTile(positionX - 1, positionY) && moveTimer <= 0)
+                }
+            }
+            else if (moveDirection != Moves.None)
+            {
+                switch (moveDirection)
+                {
+                    case Moves.Down:
+                        gameObject.yPosition += (float)((GameConstants.TileHeight / moveTime) * gameTime.ElapsedGameTime.TotalSeconds);
+                        if (Math.Round(gameObject.yPosition, 0) == targetPosY)
                         {
-                            gameObject.xPosition -= GameConstants.TileWidth;
-                            moveTimer = moveTime;
+                            gameObject.yPosition = targetPosY;
+                            moveDirection = Moves.None;
                         }
-                    }
-                    else if (events[i].ID == 3)
-                    {
-                        if (CanMoveToTile(positionX, positionY + 1) && moveTimer <= 0)
+                        break;
+                    case Moves.Up:
+                        gameObject.yPosition -= (float)((GameConstants.TileHeight / moveTime) * gameTime.ElapsedGameTime.TotalSeconds);
+                        if (Math.Round(gameObject.yPosition, 0) == targetPosY)
                         {
-                            gameObject.yPosition += GameConstants.TileHeight;
-                            moveTimer = moveTime;
+                            gameObject.yPosition = targetPosY;
+                            moveDirection = Moves.None;
                         }
-                    }
-                    else if (events[i].ID == 4)
-                    {
-                        if (CanMoveToTile(positionX, positionY - 1) && moveTimer <= 0)
+                        break;
+                    case Moves.Left:
+                        gameObject.xPosition -= (float)((GameConstants.TileHeight / moveTime) * gameTime.ElapsedGameTime.TotalSeconds);
+                        if (Math.Round(gameObject.xPosition, 0) == targetPosX)
                         {
-                            gameObject.yPosition -= GameConstants.TileHeight;
-                            moveTimer = moveTime;
+                            gameObject.xPosition = (float)Math.Round(gameObject.xPosition, 0);
+                            moveDirection = Moves.None;
                         }
-                    }
+                        break;
+                    case Moves.Right:
+                        gameObject.xPosition += (float)((GameConstants.TileHeight / moveTime) * gameTime.ElapsedGameTime.TotalSeconds);
+                        if (Math.Round(gameObject.xPosition, 0) == targetPosX)
+                        {
+                            gameObject.xPosition = (float)Math.Round(gameObject.xPosition, 0);
+                            moveDirection = Moves.None;
+                        }
+                        break;
+                    default:
+                        break;
                 }
             }
             // -----------------------

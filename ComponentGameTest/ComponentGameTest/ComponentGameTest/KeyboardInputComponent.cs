@@ -39,12 +39,7 @@ namespace ComponentGameTest
             {
                 eventHandler.QueueEvent(new GameEvent(1, gameObject.ID));
             }
-            else
-            {
-                eventHandler.QueueEvent(new GameEvent(2, gameObject.ID));
-            }
-
-            if (IsKeyDown(Keys.S))
+            else if (IsKeyDown(Keys.S))
             {
                 eventHandler.QueueEvent(new GameEvent(3, gameObject.ID));
             }
