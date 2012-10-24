@@ -7,6 +7,9 @@
 // Group
 // Physics
 
+// Editable variables
+// moveTime : float
+
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
@@ -26,15 +29,17 @@ namespace ComponentGameTest
     {
         const float moveTime = 0.25f;
         float moveTimer = 0;
-        int targetPosX = GameConstants.TileWidth;
-        int targetPosY = GameConstants.TileHeight;
+        int targetPosX = -1;
+        int targetPosY = -1;
         Moves moveDirection;
         Map_2DTile m;
 
-        public SnapToTileMovementComponent(EventHandler eventHandler, Map_2DTile m)
+        public SnapToTileMovementComponent(EventHandler eventHandler, Map_2DTile m, int StartingPosX, int StartingPosY)
             : base(eventHandler)
         {
             this.m = m;
+            targetPosX = StartingPosX;
+            targetPosY = StartingPosY;
         }
 
         public bool CanMoveToTile(int x, int y)

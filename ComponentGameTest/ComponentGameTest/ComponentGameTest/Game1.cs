@@ -62,28 +62,25 @@ namespace ComponentGameTest
             // ---------------------------------
             // Example object with components
             GameObject p1 = new GameObject();
-            p1.AddDrawComponent(new Graphics2DImageComponent(Content.Load<Texture2D>("Slime_Medium")));
-            p1.AddUpdateComponent(new SnapToTileMovementComponent(eventHandler, map));
-            p1.AddUpdateComponent(new KeyboardInputComponent(eventHandler));
-            // Setting xPosition manually for demonstration purposes.
-            p1.xPosition = 64;
-            // Set ID
-            p1.ID = IDCounter;
-            IDCounter++;
-            // Add to game objects, to run in loops.
-            gameObjects.Add(p1);
+            p1.AddDrawComponent(new Graphics2DImageComponent(Content.Load<Texture2D>("Slime_Medium")));         // Basic graphics component with no animation.
+            p1.AddUpdateComponent(new SnapToTileMovementComponent(eventHandler, map, 32, 32));                  // Sets starting position of object and enables it to move in tiles based on events from input component.
+            p1.AddUpdateComponent(new KeyboardInputComponent(eventHandler));                                    // Takes input from local keyboard.
+            AttachID(p1);                                                                                       // Set ID counter
+            gameObjects.Add(p1);                                                                                // Add to game objects, to run in loops.
             // ---------------------------------
-            // ---------------------------------
+
             // Example object with components
             GameObject p2 = new GameObject();
             p2.AddDrawComponent(new Graphics2DImageComponent(Content.Load<Texture2D>("Slime_Medium")));
-            p2.AddUpdateComponent(new PhysicsComponent(eventHandler));
-            // Set ID
-            p2.ID = IDCounter;
-            IDCounter++;
-            // Add to game objects, to run in loops.
+            AttachID(p2);
             gameObjects.Add(p2);
             // ---------------------------------
+        }
+
+        public void AttachID(GameObject gameObject)
+        {
+            gameObject.ID = IDCounter;
+            IDCounter++;
         }
 
         /// <summary>
