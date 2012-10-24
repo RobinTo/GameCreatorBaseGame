@@ -24,6 +24,15 @@ namespace ComponentGameTest
         List<GameObject> gameObjects = new List<GameObject>();
         EventHandler eventHandler = new EventHandler();
         Map_2DTile map;
+        SpriteFont font;
+
+        // FPS counter variables
+        double fpsTimer = 1.0;
+        int lastUpdate = 0;
+        int updateCounter = 0;
+        int lastFPS = 0;
+        int fpsCounter = 0;
+        // ---------------------
 
         public Game1()
         {
@@ -75,9 +84,11 @@ namespace ComponentGameTest
             AttachID(p2);
             gameObjects.Add(p2);
             // ---------------------------------
+
+            font = Content.Load<SpriteFont>("font");
         }
 
-        public void AttachID(GameObject gameObject)
+        private void AttachID(GameObject gameObject)
         {
             gameObject.ID = IDCounter;
             IDCounter++;
@@ -113,6 +124,19 @@ namespace ComponentGameTest
                 gameObjects[i].Update(gameTime);
             }
 
+            // FPS counter just to check if anything affects performance.
+            fpsTimer -= gameTime.ElapsedGameTime.TotalSeconds;
+            if (fpsTimer <= 0)
+            {
+                lastFPS = fpsCounter;
+                lastUpdate = updateCounter;
+                updateCounter = 0;
+                fpsCounter = 0;
+                fpsTimer = 1.0;
+            }
+            fpsCounter++;
+            // ---------------------------------------------------------
+
             base.Update(gameTime);
         }
 
@@ -132,7 +156,12 @@ namespace ComponentGameTest
             {
                 gameObjects[i].Draw(spriteBatch);
             }
+
+            spriteBatch.DrawString(font, "Updates: " + lastFPS, Vector2.Zero, Color.Red);
+            spriteBatch.DrawString(font, "FPS: " + lastUpdate, new Vector2(0, 50), Color.Red);
             spriteBatch.End();
+
+            updateCounter++; // FPS Counter thingie
 
             base.Draw(gameTime);
         }

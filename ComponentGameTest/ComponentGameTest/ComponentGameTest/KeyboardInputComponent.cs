@@ -7,9 +7,6 @@
 // Group
 // Input
 
-// Notes
-// We need to change this to support multiplayer.
-
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;

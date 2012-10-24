@@ -10,6 +10,9 @@
 // Editable variables
 // moveTime : float
 
+// Notes
+// Uses tile sizes from GameConstants, asumes player is size of tile.
+
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
@@ -138,11 +141,6 @@ namespace ComponentGameTest
                         break;
                     case Moves.Right:
                         gameObject.xPosition += (float)((GameConstants.TileHeight / moveTime) * gameTime.ElapsedGameTime.TotalSeconds);
-                        if (Math.Round(gameObject.xPosition, 0) == targetPosX)
-                        {
-                            gameObject.xPosition = (float)Math.Round(gameObject.xPosition, 0);
-                            moveDirection = Moves.None;
-                        }
                         break;
                     default:
                         break;

@@ -1,4 +1,13 @@
-﻿using System;
+﻿// Title
+// Collides With Map
+
+// Description
+// Makes a game collide with the map without tiles.
+
+// Group
+// Physics
+
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
