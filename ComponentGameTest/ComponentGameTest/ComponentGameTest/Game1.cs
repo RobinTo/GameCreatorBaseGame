@@ -123,7 +123,7 @@ namespace ComponentGameTest
             {
                 gameObjects[i].Update(gameTime);
             }
-
+            //endring
             // FPS counter just to check if anything affects performance.
             fpsTimer -= gameTime.ElapsedGameTime.TotalSeconds;
             if (fpsTimer <= 0)
