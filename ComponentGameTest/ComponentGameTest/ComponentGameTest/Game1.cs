@@ -23,6 +23,10 @@ namespace ComponentGameTest
         int IDCounter = 0;
         List<GameObject> gameObjects = new List<GameObject>();
         EventHandler eventHandler = new EventHandler();
+        GraphicsHandler2D graphicsHandler = new GraphicsHandler2D();
+        SoundHandler soundHandler = new SoundHandler();
+        ObjectSpawnController objectSpawnController;                // Created in loadContent.
+
         Map_2DTile map;
         SpriteFont font;
 
@@ -68,30 +72,15 @@ namespace ComponentGameTest
             // Map
             map = new Map_2DTile();
             map.Load(Content, "./Content/Map1.txt");
-            // ---------------------------------
-            // Example object with components
-            GameObject p1 = new GameObject();
-            p1.AddDrawComponent(new Graphics2DImageComponent(Content.Load<Texture2D>("Slime_Medium")));         // Basic graphics component with no animation.
-            p1.AddUpdateComponent(new SnapToTileMovementComponent(eventHandler, map, 32, 32));                  // Sets starting position of object and enables it to move in tiles based on events from input component.
-            p1.AddUpdateComponent(new KeyboardInputComponent(eventHandler));                                    // Takes input from local keyboard.
-            AttachID(p1);                                                                                       // Set ID counter
-            gameObjects.Add(p1);                                                                                // Add to game objects, to run in loops.
-            // ---------------------------------
 
-            // Example object with components
-            GameObject p2 = new GameObject();
-            p2.AddDrawComponent(new Graphics2DImageComponent(Content.Load<Texture2D>("Slime_Medium")));
-            AttachID(p2);
-            gameObjects.Add(p2);
-            // ---------------------------------
+            graphicsHandler.AddImage("player", Content.Load<Texture2D>("slime_medium"));
+            graphicsHandler.AddImage("bomb", Content.Load<Texture2D>("slime_medium"));
+
+            objectSpawnController = new ObjectSpawnController(eventHandler, gameObjects, graphicsHandler, map);
+
+            eventHandler.QueueEvent(new GameEvent(Events.SpawnPlayer, 0));
 
             font = Content.Load<SpriteFont>("font");
-        }
-
-        private void AttachID(GameObject gameObject)
-        {
-            gameObject.ID = IDCounter;
-            IDCounter++;
         }
 
         /// <summary>
@@ -117,6 +106,8 @@ namespace ComponentGameTest
             // TODO: Add your update logic here
             // Clears all old events, and puts all queued events into new event list.
             eventHandler.NewRound();
+
+            objectSpawnController.Update(gameTime);
 
             List<GameObject> gameObjectsToRemove = new List<GameObject>();
             // Updates all objects.
