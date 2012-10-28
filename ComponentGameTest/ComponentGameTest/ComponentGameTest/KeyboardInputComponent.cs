@@ -30,19 +30,19 @@ namespace ComponentGameTest
            
             if (IsKeyDown(Keys.D))
             {
-                eventHandler.QueueEvent(new GameEvent(0, gameObject.ID));
+                eventHandler.QueueEvent(new GameEvent(Events.MoveRight, gameObject.ID));
             }
             else if (IsKeyDown(Keys.A))
             {
-                eventHandler.QueueEvent(new GameEvent(1, gameObject.ID));
+                eventHandler.QueueEvent(new GameEvent(Events.MoveLeft, gameObject.ID));
             }
             else if (IsKeyDown(Keys.S))
             {
-                eventHandler.QueueEvent(new GameEvent(3, gameObject.ID));
+                eventHandler.QueueEvent(new GameEvent(Events.MoveDown, gameObject.ID));
             }
             else if (IsKeyDown(Keys.W))
             {
-                eventHandler.QueueEvent(new GameEvent(4, gameObject.ID));
+                eventHandler.QueueEvent(new GameEvent(Events.MoveUp, gameObject.ID));
             }
 
             oldK = newK;

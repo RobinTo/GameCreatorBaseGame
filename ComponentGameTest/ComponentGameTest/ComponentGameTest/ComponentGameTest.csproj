@@ -108,6 +108,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollisionComponent.cs" />
+    <Compile Include="DestroyComponent.cs" />
+    <Compile Include="EventEnums.cs" />
     <Compile Include="EventHandler.cs" />
     <Compile Include="GameConstants.cs" />
     <Compile Include="GameEvent.cs" />

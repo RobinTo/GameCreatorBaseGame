@@ -33,7 +33,7 @@ namespace ComponentGameTest
                     (new Rectangle((int)gameObjects[i].xPosition, (int)gameObjects[i].yPosition, gameObjects[i].width, gameObjects[i].height)))
                 {
                     // Collision.
-                    eventHandler.QueueEvent(new GameEvent(10, gameObject.ID));
+                    eventHandler.QueueEvent(new GameEvent(Events.GeneralCollision, gameObject.ID));
                 }   
             }
         }

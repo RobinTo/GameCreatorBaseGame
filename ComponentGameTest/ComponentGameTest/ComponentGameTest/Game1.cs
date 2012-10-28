@@ -118,12 +118,20 @@ namespace ComponentGameTest
             // Clears all old events, and puts all queued events into new event list.
             eventHandler.NewRound();
 
+            List<GameObject> gameObjectsToRemove = new List<GameObject>();
             // Updates all objects.
             for (int i = 0; i < gameObjects.Count; i++)
             {
+                if (gameObjects[i].remove)
+                    gameObjectsToRemove.Add(gameObjects[i]);
                 gameObjects[i].Update(gameTime);
             }
-            //endring
+            foreach (GameObject gO in gameObjectsToRemove)
+            {
+                gameObjects.Remove(gO);
+            }
+
+
             // FPS counter just to check if anything affects performance.
             fpsTimer -= gameTime.ElapsedGameTime.TotalSeconds;
             if (fpsTimer <= 0)
@@ -157,11 +165,13 @@ namespace ComponentGameTest
                 gameObjects[i].Draw(spriteBatch);
             }
 
+            // FPS counter
             spriteBatch.DrawString(font, "Updates: " + lastFPS, Vector2.Zero, Color.Red);
             spriteBatch.DrawString(font, "FPS: " + lastUpdate, new Vector2(0, 50), Color.Red);
+            // ----------
             spriteBatch.End();
 
-            updateCounter++; // FPS Counter thingie
+            updateCounter++; // FPS Counter
 
             base.Draw(gameTime);
         }

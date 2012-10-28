@@ -15,6 +15,8 @@ namespace ComponentGameTest
     {
         public int ID;              // Unique ID
 
+        public bool remove = false;        // Used when the object should be removed
+
         public float xPosition = 0; // For position
         public float yPosition = 0; // For position
         public int height = 0;      // For collision

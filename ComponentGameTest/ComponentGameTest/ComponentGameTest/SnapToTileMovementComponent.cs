@@ -72,7 +72,7 @@ namespace ComponentGameTest
                     {
                         int positionX = (int)Math.Round(gameObject.xPosition / GameConstants.TileWidth, 0);
                         int positionY = (int)Math.Round(gameObject.yPosition / GameConstants.TileHeight, 0);
-                        if (events[i].ID == 0)
+                        if (events[i].ID == Events.MoveRight)
                         {
                             if (CanMoveToTile(positionX + 1, positionY))
                             {
@@ -81,7 +81,7 @@ namespace ComponentGameTest
                                 moveTimer = moveTime;
                             }
                         }
-                        else if (events[i].ID == 1)
+                        else if (events[i].ID == Events.MoveLeft)
                         {
                             if (CanMoveToTile(positionX - 1, positionY))
                             {
@@ -90,7 +90,7 @@ namespace ComponentGameTest
                                 moveTimer = moveTime;
                             }
                         }
-                        else if (events[i].ID == 3)
+                        else if (events[i].ID == Events.MoveDown)
                         {
                             if (CanMoveToTile(positionX, positionY + 1))
                             {
@@ -99,7 +99,7 @@ namespace ComponentGameTest
                                 moveTimer = moveTime;
                             }
                         }
-                        else if (events[i].ID == 4)
+                        else if (events[i].ID == Events.MoveUp)
                         {
                             if (CanMoveToTile(positionX, positionY - 1))
                             {
