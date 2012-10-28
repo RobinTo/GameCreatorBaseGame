@@ -8,10 +8,10 @@ namespace ComponentGameTest
 {
     class GameEvent
     {
-        public int ID;
+        public Events ID;
         public int ActOnID;
 
-        public GameEvent(int ID, int ActOnID)
+        public GameEvent(Events ID, int ActOnID)
         {
             this.ID = ID;
             this.ActOnID = ActOnID;
