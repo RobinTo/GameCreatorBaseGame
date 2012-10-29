@@ -7,9 +7,9 @@ namespace ComponentGameTest
     class TimerComponent : UpdateComponent
     {
         float time;
-        Events eventToCreate;
+        GameEvent eventToCreate;
 
-        public TimerComponent(EventHandler eventHandler, float time, Events eventToCreate)
+        public TimerComponent(EventHandler eventHandler, float time, GameEvent eventToCreate)
             : base(eventHandler)
         {
             this.time = time;
@@ -20,7 +20,7 @@ namespace ComponentGameTest
         {
             time -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (time <= 0)
-                eventHandler.QueueEvent(new GameEvent(eventToCreate, gameObject.ID));
+                eventHandler.QueueEvent(eventToCreate);
         }
     }
 }

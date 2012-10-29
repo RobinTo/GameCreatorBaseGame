@@ -19,8 +19,6 @@ namespace ComponentGameTest
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-
-        int IDCounter = 0;
         List<GameObject> gameObjects = new List<GameObject>();
         EventHandler eventHandler = new EventHandler();
         GraphicsHandler2D graphicsHandler = new GraphicsHandler2D();
@@ -77,8 +75,9 @@ namespace ComponentGameTest
             graphicsHandler.AddImage("bomb", Content.Load<Texture2D>("slime_medium"));
 
             objectSpawnController = new ObjectSpawnController(eventHandler, gameObjects, graphicsHandler, map);
-
-            eventHandler.QueueEvent(new GameEvent(Events.SpawnPlayer, 0));
+            
+            // How a spawn player event would be added, with the spawn code genereated inside ObjectSpawnController.
+            eventHandler.QueueEvent(new SpawnEvent("player"));
 
             font = Content.Load<SpriteFont>("font");
         }
@@ -149,6 +148,7 @@ namespace ComponentGameTest
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
+
             map.Draw(spriteBatch);
 
             for (int i = 0; i < gameObjects.Count; i++)

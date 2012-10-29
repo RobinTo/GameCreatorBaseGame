@@ -30,22 +30,10 @@ namespace ComponentGameTest
         public override void Update(GameObject gameObject, GameTime gameTime)
         {
             newK = Keyboard.GetState();
-           
-            if (IsKeyDown(Keys.D))
+
+            foreach (Keys k in newK.GetPressedKeys())
             {
-                eventHandler.QueueEvent(new GameEvent(Events.MoveRight, gameObject.ID));
-            }
-            else if (IsKeyDown(Keys.A))
-            {
-                eventHandler.QueueEvent(new GameEvent(Events.MoveLeft, gameObject.ID));
-            }
-            else if (IsKeyDown(Keys.S))
-            {
-                eventHandler.QueueEvent(new GameEvent(Events.MoveDown, gameObject.ID));
-            }
-            else if (IsKeyDown(Keys.W))
-            {
-                eventHandler.QueueEvent(new GameEvent(Events.MoveUp, gameObject.ID));
+                eventHandler.QueueEvent(new InputEvent(k));
             }
 
             oldK = newK;

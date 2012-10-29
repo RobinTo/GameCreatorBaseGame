@@ -16,6 +16,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace ComponentGameTest
 {
@@ -57,56 +58,65 @@ namespace ComponentGameTest
             return false;
         }
 
+        bool movedThisTurn;
         public override void Update(GameObject gameObject, GameTime gameTime)
         {
             moveTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             // Event handling
             if (moveTimer <= 0)
             {
+                movedThisTurn = false;
                 gameObject.xPosition = targetPosX;
                 gameObject.yPosition = targetPosY;
                 List<GameEvent> events = eventHandler.Events;
                 for (int i = 0; i < events.Count; i++)
                 {
-                    if (events[i].ActOnID == gameObject.ID)
+                    if (movedThisTurn)
+                        break;
+                    if (events[i].ID == Events.Input)
                     {
-                        int positionX = (int)Math.Round(gameObject.xPosition / GameConstants.TileWidth, 0);
-                        int positionY = (int)Math.Round(gameObject.yPosition / GameConstants.TileHeight, 0);
-                        if (events[i].ID == Events.MoveRight)
+                        int positionX = (int)Math.Round((double)targetPosX / GameConstants.TileWidth, 0);
+                        int positionY = (int)Math.Round((double)targetPosY / GameConstants.TileHeight, 0);
+                        switch((events[i] as InputEvent).key)
                         {
-                            if (CanMoveToTile(positionX + 1, positionY))
-                            {
-                                moveDirection = Moves.Right;
-                                targetPosX += GameConstants.TileWidth;
-                                moveTimer = moveTime;
-                            }
-                        }
-                        else if (events[i].ID == Events.MoveLeft)
-                        {
-                            if (CanMoveToTile(positionX - 1, positionY))
-                            {
-                                moveDirection = Moves.Left;
-                                targetPosX -= GameConstants.TileWidth;
-                                moveTimer = moveTime;
-                            }
-                        }
-                        else if (events[i].ID == Events.MoveDown)
-                        {
-                            if (CanMoveToTile(positionX, positionY + 1))
-                            {
-                                moveDirection = Moves.Down;
-                                targetPosY += GameConstants.TileHeight;
-                                moveTimer = moveTime;
-                            }
-                        }
-                        else if (events[i].ID == Events.MoveUp)
-                        {
-                            if (CanMoveToTile(positionX, positionY - 1))
-                            {
-                                moveDirection = Moves.Up;
-                                targetPosY -= GameConstants.TileHeight;
-                                moveTimer = moveTime;
-                            }
+                            case Keys.D:
+                                if (CanMoveToTile(positionX + 1, positionY))
+                                {
+                                    moveDirection = Moves.Right;
+                                    targetPosX += GameConstants.TileWidth;
+                                    moveTimer = moveTime;
+                                    movedThisTurn = true;
+                                }
+                                break;
+                            case Keys.A:
+                                if (CanMoveToTile(positionX - 1, positionY))
+                                {
+                                    moveDirection = Moves.Left;
+                                    targetPosX -= GameConstants.TileWidth;
+                                    moveTimer = moveTime;
+                                    movedThisTurn = true;
+                                }
+                                break;
+                            case Keys.S:
+                                if (CanMoveToTile(positionX, positionY + 1))
+                                {
+                                    moveDirection = Moves.Down;
+                                    targetPosY += GameConstants.TileHeight;
+                                    moveTimer = moveTime;
+                                    movedThisTurn = true;
+                                }
+                                break;
+                            case Keys.W:
+                                if (CanMoveToTile(positionX, positionY - 1))
+                                {
+                                    moveDirection = Moves.Up;
+                                    targetPosY -= GameConstants.TileHeight;
+                                    moveTimer = moveTime;
+                                    movedThisTurn = true;
+                                }
+                                break;
+                            default:
+                                break;
                         }
                     }
                 }

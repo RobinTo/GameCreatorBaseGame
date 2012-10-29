@@ -10,6 +10,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace ComponentGameTest
 {
@@ -31,16 +32,25 @@ namespace ComponentGameTest
             List<GameEvent> events = eventHandler.Events;
             for (int i = 0; i < events.Count; i++)
             {
-                if (events[i].ActOnID == gameObject.ID)
+                if (events[i].ID == Events.Input)
                 {
-                    if (events[i].ID == Events.MoveRight)
-                        xVelocity += 10.0f * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    else if (events[i].ID == Events.MoveLeft)
-                        xVelocity -= 10.0f * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    else if (events[i].ID == Events.MoveDown)
-                        yVelocity += 10.0f * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    else if (events[i].ID == Events.MoveUp)
-                        yVelocity -= 10.0f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    switch((events[i] as InputEvent).key)
+                    {
+                        case Keys.D:
+                            xVelocity += 10.0f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                            break;
+                        case Keys.A:
+                            xVelocity -= 10.0f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                            break;
+                        case Keys.S:
+                            yVelocity += 10.0f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                            break;
+                        case Keys.W:
+                            yVelocity -= 10.0f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
             // -----------------------

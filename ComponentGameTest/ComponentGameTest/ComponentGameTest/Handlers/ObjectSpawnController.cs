@@ -37,30 +37,21 @@ namespace ComponentGameTest
             List<GameEvent> events = eventHandler.Events;
             for (int i = 0; i < events.Count; i++)
             {
-                switch (events[i].ID)
+                if (events[i].ID == Events.SpawnObject)
                 {
-                    case Events.SpawnPlayer:
-                        GameObject player = new GameObject();
-                        player.AddDrawComponent(new Graphics2DImageComponent(graphicsHandler.getTexture("player")));             // Basic graphics component with no animation.
-                        player.AddUpdateComponent(new SnapToTileMovementComponent(eventHandler, map, 32, 32));                  // Sets starting position of object and enables it to move in tiles based on events from input component.
-                        player.AddUpdateComponent(new KeyboardInputComponent(eventHandler));                                    // Takes input from local keyboard.
-                        AttachID(player);                                                                                       // Set ID counter
-                        gameObjects.Add(player);                                                                                // Add to game objects, to run in loops.
-                        break;
-                    case Events.SpawnBomb:
-                        GameObject newBomb = new GameObject();
-                        for (int p = 0; p < gameObjects.Count; p++)
-                        {
-                            if (gameObjects[p].ID == events[i].ActOnID)
-                            {
-                                newBomb.xPosition = gameObjects[p].xPosition;
-                                newBomb.yPosition = gameObjects[p].yPosition;
-                            }
-                        }
-                        newBomb.AddDrawComponent(new Graphics2DImageComponent(graphicsHandler.getTexture("bomb")));
-                        break;
-                    default:
-                        break;
+                    switch ((events[i] as SpawnEvent).ObjectName)
+                    {
+                        case "player":
+                            GameObject newPlayer = new GameObject();
+                            newPlayer.AddUpdateComponent(new KeyboardInputComponent(eventHandler));
+                            newPlayer.AddDrawComponent(new Graphics2DImageComponent(graphicsHandler.getTexture("player")));
+                            newPlayer.AddUpdateComponent(new SnapToTileMovementComponent(eventHandler, map, GameConstants.TileWidth, GameConstants.TileHeight));
+                            gameObjects.Add(newPlayer);
+                            break;
+                        // Insert code for objects here.
+                        default:
+                            break;
+                    }
                 }
             }
         }
