@@ -107,30 +107,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CollisionComponent.cs" />
-    <Compile Include="DestroyComponent.cs" />
-    <Compile Include="EventEnums.cs" />
-    <Compile Include="EventHandler.cs" />
-    <Compile Include="GameConstants.cs" />
-    <Compile Include="GameEvent.cs" />
-    <Compile Include="GameObject.cs" />
-    <Compile Include="Graphics2DImageComponent.cs" />
-    <Compile Include="GraphicsComponent.cs" />
-    <Compile Include="GraphicsHandler2D.cs" />
-    <Compile Include="KeyboardInputComponent.cs" />
-    <Compile Include="Map_2DPlattformerTileCollisionComponent.cs" />
-    <Compile Include="Map_2DTile.cs" />
-    <Compile Include="Map_2DTileCollisionComponent.cs" />
-    <Compile Include="ObjectSpawnController.cs" />
-    <Compile Include="PhysicsComponent.cs" />
+    <Compile Include="Components\Update\DestroyComponent.cs" />
+    <Compile Include="Events\EventEnums.cs" />
+    <Compile Include="Handlers\EventHandler.cs" />
+    <Compile Include="Misc\GameConstants.cs" />
+    <Compile Include="Events\GameEvent.cs" />
+    <Compile Include="GameObjects\GameObject.cs" />
+    <Compile Include="Components\Draw\Graphics2DImageComponent.cs" />
+    <Compile Include="Components\Parents\GraphicsComponent.cs" />
+    <Compile Include="Handlers\GraphicsHandler2D.cs" />
+    <Compile Include="Components\Update\KeyboardInputComponent.cs" />
+    <Compile Include="Components\Update\Map_2DPlattformerTileCollisionComponent.cs" />
+    <Compile Include="Maps\Map_2DTile.cs" />
+    <Compile Include="Components\Update\Map_2DTileCollisionComponent.cs" />
+    <Compile Include="Handlers\ObjectSpawnController.cs" />
+    <Compile Include="Components\Update\PhysicsComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Game1.cs" />
-    <Compile Include="RectangleExtensions.cs" />
-    <Compile Include="SnapToTileMovementComponent.cs" />
-    <Compile Include="SoundHandler.cs" />
-    <Compile Include="TimerComponent.cs" />
-    <Compile Include="UpdateComponent.cs" />
+    <Compile Include="Misc\Program.cs" />
+    <Compile Include="Misc\Game1.cs" />
+    <Compile Include="Misc\RectangleExtensions.cs" />
+    <Compile Include="Components\Update\SnapToTileMovementComponent.cs" />
+    <Compile Include="Handlers\SoundHandler.cs" />
+    <Compile Include="Components\Update\TimerComponent.cs" />
+    <Compile Include="Components\Parents\UpdateComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
