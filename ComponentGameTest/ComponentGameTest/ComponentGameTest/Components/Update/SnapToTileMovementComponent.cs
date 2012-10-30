@@ -71,7 +71,7 @@ namespace ComponentGameTest
                 List<GameEvent> events = eventHandler.Events;
                 for (int i = 0; i < events.Count; i++)
                 {
-                    if (movedThisTurn)
+                    if (movedThisTurn)      // Players can only move one tile per turn, and not diagonally.
                         break;
                     if (events[i].ID == Events.Input)
                     {
@@ -121,7 +121,7 @@ namespace ComponentGameTest
                     }
                 }
             }
-            else if (moveDirection != Moves.None)
+            else if (moveDirection != Moves.None) // This parts makes the move look smooth, rather than jump to next tile instantly and wait for moveduration.
             {
                 switch (moveDirection)
                 {
