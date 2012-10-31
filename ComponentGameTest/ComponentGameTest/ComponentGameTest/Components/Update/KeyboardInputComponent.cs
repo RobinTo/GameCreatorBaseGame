@@ -33,7 +33,7 @@ namespace ComponentGameTest
 
             foreach (Keys k in newK.GetPressedKeys())
             {
-                eventHandler.QueueEvent(new InputEvent(k));
+                eventHandler.QueueEvent(new InputEvent(k, gameObject.ID));
             }
 
             oldK = newK;

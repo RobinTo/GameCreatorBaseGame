@@ -107,8 +107,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Update\CollidesWithObjectComponent.cs" />
     <Compile Include="Components\Update\DestroyComponent.cs" />
     <Compile Include="Components\Update\ExpandComponent.cs" />
+    <Compile Include="Components\Update\Keyboard2InputComponent.cs" />
     <Compile Include="Components\Update\SpawnObjectComponent.cs" />
     <Compile Include="Events\CollisionEvent.cs" />
     <Compile Include="Events\DestroyEvent.cs" />

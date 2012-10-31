@@ -39,16 +39,27 @@ namespace ComponentGameTest
                     switch ((events[i] as SpawnEvent).ObjectName)
                     {
                         case "player":
-                            GameObject newPlayer = new GameObject();
+                            GameObject newPlayer = new GameObject("player");
                             AttachID(newPlayer);
                             newPlayer.AddUpdateComponent(new KeyboardInputComponent(eventHandler));
+                            newPlayer.AddUpdateComponent(new CollidesWithObjectComponent(eventHandler));
                             newPlayer.AddDrawComponent(new Graphics2DImageComponent(graphicsHandler.getTexture("player")));
                             newPlayer.AddUpdateComponent(new SnapToTileMovementComponent(eventHandler, map, gameObjects, GameConstants.TileWidth, GameConstants.TileHeight));
                             newPlayer.AddUpdateComponent(new SpawnObjectComponent(eventHandler, "bomb", Keys.Space, 2.5f));
                             gameObjects.Add(newPlayer);
                             break;
+                        case "player2":
+                            GameObject newPlayer2 = new GameObject("player");
+                            AttachID(newPlayer2);
+                            newPlayer2.AddUpdateComponent(new Keyboard2InputComponent(eventHandler)); // Uses arrows and enter
+                            newPlayer2.AddUpdateComponent(new CollidesWithObjectComponent(eventHandler));
+                            newPlayer2.AddDrawComponent(new Graphics2DImageComponent(graphicsHandler.getTexture("player")));
+                            newPlayer2.AddUpdateComponent(new SnapToTileMovementComponent(eventHandler, map, gameObjects, GameConstants.TileWidth, GameConstants.TileHeight));
+                            newPlayer2.AddUpdateComponent(new SpawnObjectComponent(eventHandler, "bomb", Keys.Space, 2.5f));
+                            gameObjects.Add(newPlayer2);
+                            break;
                         case "bomb":
-                            GameObject newBomb = new GameObject();
+                            GameObject newBomb = new GameObject("bomb");
                             AttachID(newBomb);
                             if ((events[i] as SpawnEvent).hasPosition)
                             {
@@ -61,7 +72,7 @@ namespace ComponentGameTest
                             gameObjects.Add(newBomb);
                             break;
                         case "explosionCenter":
-                            GameObject explosion = new GameObject();
+                            GameObject explosion = new GameObject("explosionCenter");
                             AttachID(explosion);
                             explosion.isSolid = false;
                             if ((events[i] as SpawnEvent).hasPosition)
@@ -75,7 +86,7 @@ namespace ComponentGameTest
                             gameObjects.Add(explosion);
                             break;
                         case "explosionExpansion": // Need one without the expandcomponent to keep it from expanding forevet
-                            GameObject explosionExpansion = new GameObject();
+                            GameObject explosionExpansion = new GameObject("explosionExpansion");
                             AttachID(explosionExpansion);
                             explosionExpansion.isSolid = false;
                             if ((events[i] as SpawnEvent).hasPosition)

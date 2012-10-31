@@ -14,7 +14,7 @@ namespace ComponentGameTest
     class GameObject
     {
         public int ID;              // Unique ID
-
+        public string type;         // Identifier used in objectSpawnHandler
         public bool remove = false; // Used when the object should be removed
 
         public bool isSolid = true; // Is it solid?
@@ -36,9 +36,9 @@ namespace ComponentGameTest
             drawComponents.Add(drawComponent);
         }
 
-        public GameObject()
+        public GameObject(string identifier)
         {
-
+            this.type = identifier;
         }
 
         public GameObject(List<UpdateComponent> updateComponents)

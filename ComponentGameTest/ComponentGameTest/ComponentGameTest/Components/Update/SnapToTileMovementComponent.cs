@@ -84,7 +84,7 @@ namespace ComponentGameTest
                 {
                     if (movedThisTurn)      // Players can only move one tile per turn, and not diagonally.
                         break;
-                    if (events[i].ID == Events.Input)
+                    if (events[i].ID == Events.Input && (events[i] as InputEvent).GameObjectID == gameObject.ID)
                     {
                         int positionX = (int)Math.Round((double)targetPosX / GameConstants.TileWidth, 0);
                         int positionY = (int)Math.Round((double)targetPosY / GameConstants.TileHeight, 0);

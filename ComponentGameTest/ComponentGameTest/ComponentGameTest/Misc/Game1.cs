@@ -24,6 +24,7 @@ namespace ComponentGameTest
         GraphicsHandler2D graphicsHandler = new GraphicsHandler2D();
         SoundHandler soundHandler = new SoundHandler();
         ObjectSpawnController objectSpawnController;                // Created in loadContent.
+        CollisionHandler collisionHandler;
 
         Map_2DTile map;
         SpriteFont font;
@@ -76,9 +77,11 @@ namespace ComponentGameTest
             graphicsHandler.AddImage("explosion", Content.Load<Texture2D>("explosion"));
 
             objectSpawnController = new ObjectSpawnController(eventHandler, gameObjects, graphicsHandler, map);
-            
+            collisionHandler = new CollisionHandler(eventHandler, gameObjects);
             // How a spawn player event would be added, with the spawn code genereated inside ObjectSpawnController.
             eventHandler.QueueEvent(new SpawnEvent("player"));
+
+            eventHandler.QueueEvent(new SpawnEvent("player2"));
 
             font = Content.Load<SpriteFont>("font");
         }
@@ -108,6 +111,7 @@ namespace ComponentGameTest
             eventHandler.NewRound();
 
             objectSpawnController.Update(gameTime);
+            collisionHandler.Update(gameTime);
 
             List<GameObject> gameObjectsToRemove = new List<GameObject>();
             // Updates all objects.
