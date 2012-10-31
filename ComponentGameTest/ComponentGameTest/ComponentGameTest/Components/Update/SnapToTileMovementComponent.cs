@@ -37,11 +37,13 @@ namespace ComponentGameTest
         int targetPosY = -1;
         Moves moveDirection;
         Map_2DTile m;
+        List<GameObject> gameObjects;
 
-        public SnapToTileMovementComponent(EventHandler eventHandler, Map_2DTile m, int StartingPosX, int StartingPosY)
+        public SnapToTileMovementComponent(EventHandler eventHandler, Map_2DTile m, List<GameObject> gameObjects, int StartingPosX, int StartingPosY)
             : base(eventHandler)
         {
             this.m = m;
+            this.gameObjects = gameObjects;
             targetPosX = StartingPosX;
             targetPosY = StartingPosY;
         }
@@ -52,8 +54,17 @@ namespace ComponentGameTest
             {
                 if (m.Map[x, y] != 0)
                     return false;
-                else
-                    return true;
+                foreach (GameObject go in gameObjects)
+                {
+                    if (go.isSolid)
+                    {
+                        int positionX = (int)Math.Round(go.xPosition / GameConstants.TileWidth, 0);
+                        int positionY = (int)Math.Round(go.yPosition / GameConstants.TileHeight, 0);
+                        if (positionX == x && positionY == y)
+                            return false;
+                    }
+                }
+                return true;
             }
             return false;
         }

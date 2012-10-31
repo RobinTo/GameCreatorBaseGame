@@ -6,7 +6,7 @@
 
 namespace ComponentGameTest
 {
-    class GameEvent
+    abstract class GameEvent
     {
         public Events ID;
 

@@ -108,10 +108,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Update\DestroyComponent.cs" />
+    <Compile Include="Components\Update\ExpandComponent.cs" />
+    <Compile Include="Components\Update\SpawnObjectComponent.cs" />
+    <Compile Include="Events\CollisionEvent.cs" />
     <Compile Include="Events\DestroyEvent.cs" />
     <Compile Include="Events\EventEnums.cs" />
     <Compile Include="Events\InputEvent.cs" />
     <Compile Include="Events\SpawnEvent.cs" />
+    <Compile Include="Events\TimerEvent.cs" />
+    <Compile Include="Handlers\CollisionHandler.cs" />
     <Compile Include="Handlers\EventHandler.cs" />
     <Compile Include="Misc\GameConstants.cs" />
     <Compile Include="Events\GameEvent.cs" />

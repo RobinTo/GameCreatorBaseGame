@@ -17,6 +17,7 @@ namespace ComponentGameTest
 
         public bool remove = false; // Used when the object should be removed
 
+        public bool isSolid = true; // Is it solid?
         public float xPosition = 0; // For position
         public float yPosition = 0; // For position
         public int height = 0;      // For collision

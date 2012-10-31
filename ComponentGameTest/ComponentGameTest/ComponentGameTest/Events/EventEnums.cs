@@ -10,6 +10,7 @@ namespace ComponentGameTest
         Input,
         Collision,
         SpawnObject,
-        DestroyObject
+        DestroyObject,
+        Timer
     }
 }

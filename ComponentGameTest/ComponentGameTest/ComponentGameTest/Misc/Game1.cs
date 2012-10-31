@@ -72,7 +72,8 @@ namespace ComponentGameTest
             map.Load(Content, "./Content/Map1.txt");
 
             graphicsHandler.AddImage("player", Content.Load<Texture2D>("slime_medium"));
-            graphicsHandler.AddImage("bomb", Content.Load<Texture2D>("slime_medium"));
+            graphicsHandler.AddImage("bomb", Content.Load<Texture2D>("bomb"));
+            graphicsHandler.AddImage("explosion", Content.Load<Texture2D>("explosion"));
 
             objectSpawnController = new ObjectSpawnController(eventHandler, gameObjects, graphicsHandler, map);
             
