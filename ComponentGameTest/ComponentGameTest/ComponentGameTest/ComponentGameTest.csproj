@@ -116,10 +116,13 @@
     <Compile Include="Events\DestroyEvent.cs" />
     <Compile Include="Events\EventEnums.cs" />
     <Compile Include="Events\InputEvent.cs" />
+    <Compile Include="Events\PlayerDeadEvent.cs" />
     <Compile Include="Events\SpawnEvent.cs" />
     <Compile Include="Events\TimerEvent.cs" />
     <Compile Include="Handlers\CollisionHandler.cs" />
     <Compile Include="Handlers\EventHandler.cs" />
+    <Compile Include="Handlers\WinConditions\DeathmatchWinCondition.cs" />
+    <Compile Include="Handlers\WinConditions\WinConditionHandler.cs" />
     <Compile Include="Misc\GameConstants.cs" />
     <Compile Include="Events\GameEvent.cs" />
     <Compile Include="GameObjects\GameObject.cs" />

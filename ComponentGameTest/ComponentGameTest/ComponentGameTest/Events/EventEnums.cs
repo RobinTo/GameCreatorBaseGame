@@ -11,6 +11,7 @@ namespace ComponentGameTest
         Collision,
         SpawnObject,
         DestroyObject,
-        Timer
+        Timer,
+        PlayerDead
     }
 }
